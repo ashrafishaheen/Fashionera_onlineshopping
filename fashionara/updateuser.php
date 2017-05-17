@@ -1,0 +1,23 @@
+<?php
+session_start();
+if(!isset($_SESSION['username']))
+{
+header('location:index.php');
+}
+$id=$_POST['uid'];
+$username=$_POST['user'];
+$ph=$_POST['phone'];
+$add=$_POST['address'];
+$email=$_POST['emailid'];
+include_once('connect.php');
+mysql_query("update customer set username='$username',mobile_no='$ph',address='$add',email='$email' where id=$id");
+$c=mysql_affected_rows($con);
+if($c>0)
+{
+header('location:index.php');
+}
+else
+{
+header('location:editprofile.php');
+}
+?>
